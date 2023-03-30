@@ -1,4 +1,4 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from core.abstract.views import AbstractViewSet
 from core.post.models import Post
 from core.post.serializers import PostSerializer

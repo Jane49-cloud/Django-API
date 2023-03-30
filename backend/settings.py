@@ -19,6 +19,11 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5137",
+    "http://127.0.0.1:5137"
+]
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -33,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     # 'django_filters',
     'core',
+    'corsheaders',
     'core.user',
     'core.auth',
     'core.post'
@@ -40,8 +46,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -70,10 +78,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    # "DEFAULT_FILTER_BACKENDS": ["django_filter.rest_framework.DjangoFilterBackend"],
     'DEFAULT_PAGINATION_CLASS':
     'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 15,

@@ -36,7 +36,7 @@ class UserManager(BaseUserManager, AbstractManager):
                           email=self.normalize_email(email), **kwargs)
         user.set_password(password)
         user.save(using=self.db)
-        user.is_superuser = True
+
         user.is_staff = True
         return user
 
@@ -56,7 +56,8 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
         "core_post.Post",
         related_name="liked_by"
     )
-    is_superuser = models.BooleanField(default=False)
+    # is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     USERNAME_FIELD = 'email'
