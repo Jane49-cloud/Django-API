@@ -75,7 +75,7 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
         """Remove a like from a `post`"""
         return self.posts_liked.remove(post)
 
-    def has_liked(self, post):
+    def has_liked_post(self, post):
         """Return True if the user has liked a `post`; else
            False"""
         return self.posts_liked.filter(pk=post.pk).exists()

@@ -1,9 +1,10 @@
 import axios from "axios";
+import { getAccessToken, getRefreshToken } from "../hooks/user.action";
 
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 
 const axiosService = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "http://localhost:8000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -29,7 +30,7 @@ const refreshAuthLogic = async (failedRequest) => {
         refresh: getRefreshToken(),
       },
       {
-        baseURL: "http://localhost:8000",
+        baseURL: "http://localhost:8000/api",
       }
     )
     .then((resp) => {

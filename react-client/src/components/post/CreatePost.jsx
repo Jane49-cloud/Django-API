@@ -3,7 +3,6 @@ import { Button, Modal, Form } from "react-bootstrap";
 import axiosService from "../../helpers/axios";
 import { getUser } from "../../hooks/user.action";
 import Toaster from "../Toaster";
-import axios from "axios";
 
 function CreatePost() {
   const [show, setShow] = useState(false);
@@ -28,8 +27,8 @@ function CreatePost() {
       body: form.body,
     };
     console.log("hello this is", data);
-    axios
-      .post("http://localhost:8000/api/post/", data)
+    axiosService
+      .post("/post/", data)
       .then(() => {
         handleClose();
         setToastMessage("Post created 🚀");
@@ -37,7 +36,9 @@ function CreatePost() {
         setForm({});
         setShowToast(true);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
+        console.error(error.response.data);
         setToastMessage("An error occurred.");
         setToastType("danger");
       });

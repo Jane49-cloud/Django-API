@@ -18,6 +18,8 @@ class UserSerializer(AbstractSerializer):
             'avatar',
             'email',
             'is_active',
+            "id",
+            "public_id"
 
         ]
         read_only_field = ["is_active"]

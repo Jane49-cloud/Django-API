@@ -13,17 +13,20 @@ export function useUserActions() {
 
 // Login the user
 export function login(data) {
-  return axios.post(`${baseURL}/auth/login/`, data).then((res) => {
-    // Registering the account and tokens in the
-    // store
-    setUserData(data);
-    navigate("/");
-  });
+  return axios
+    .post(`http://localhost:8000/api/auth/login/`, data)
+    .then((res) => {
+      // Registering the account and tokens in the
+      // store
+      setUserData(data);
+      navigate("/");
+    });
 }
 
 // Get the user
 export function getUser() {
   const auth = JSON.parse(localStorage.getItem("auth")) || null;
+  // console.log(auth.user);
   if (auth) {
     return auth.user;
   } else {
@@ -31,17 +34,17 @@ export function getUser() {
   }
 }
 // Get the access token
-function getAccessToken() {
+export function getAccessToken() {
   const auth = JSON.parse(localStorage.getItem("auth"));
   return auth.access;
 }
 // Get the refresh token
-function getRefreshToken() {
+export function getRefreshToken() {
   const auth = JSON.parse(localStorage.getItem("auth"));
   return auth.refresh;
 }
 // Set the access, token and user property
-function setUserData(data) {
+function setUserData(res) {
   localStorage.setItem(
     "auth",
     JSON.stringify({
